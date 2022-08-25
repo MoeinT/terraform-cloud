@@ -1,6 +1,7 @@
 resource "azurerm_resource_group" "rg-streamingData" {
   name     = "rg-${var.suffix}-${var.environment}"
   location = var.location
+  tags     = local.volvo_tags
 }
 
 resource "azurerm_storage_account" "sq-streamingData" {
@@ -10,6 +11,7 @@ resource "azurerm_storage_account" "sq-streamingData" {
   account_tier             = "Standard"
   account_replication_type = "LRS"
   is_hns_enabled           = true
+  tags                     = local.volvo_tags
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "fs-streamingData" {
