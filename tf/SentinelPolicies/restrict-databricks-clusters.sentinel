@@ -1,0 +1,24 @@
+import "tfplan-functions" as plan
+
+allowed_nodes = ["Standard_DS3_v2"]
+
+all_db_clusters = plan.find_resources("databricks_cluster")
+
+violatingDBclusters = plan.filter_attribute_not_in_list(all_db_clusters, 
+                "node_type_id", allowed_nodes, true)
+
+ClustersNodeVialations = length(violatingDBclusters["messages"])
+
+
+
+max_workers = 5
+allClusters = plan.find_resources("databricks_cluster")
+
+ClustersWithInvalidMaxWorkers = plan.filter_attribute_greater_than_value(allClusters,
+                "autoscale.0.max_workers", max_workers, true)
+
+MaxWorkersVialations = length(ClustersWithInvalidMaxWorkers["messages"])
+
+main = rule {
+    MaxWorkersVialations is 0 and ClustersNodeVialations is 0
+}
