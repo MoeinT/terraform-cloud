@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg-streamingData" {
 }
 
 resource "azurerm_storage_account" "sq-streamingData" {
-  name                     = "sa22${var.suffix}${var.environment}"
+  name                     = "sa${var.suffix}${var.environment}"
   resource_group_name      = azurerm_resource_group.rg-streamingData.name
   location                 = azurerm_resource_group.rg-streamingData.location
   account_tier             = "Standard"
