@@ -14,6 +14,6 @@ policy "restrict-eventhub" {
     enforcement_level = "hard-mandatory"
 }
 
-/* policy "restrict-storageaccounts" {
+policy "enforce-tags" {
     enforcement_level = "hard-mandatory"
-} */
+}
