@@ -26,3 +26,13 @@ resource "databricks_cluster" "db-cluster" {
     max_workers = 4
   }
 }
+
+resource "databricks_notebook" "AllNotebooks" {
+  for_each = {
+    TweetStreaming = { source : "../scripts/StreamingTweets.py", path : "/Eventhubs/StreamingTweets" },
+    MountDatalake  = { source : "../scripts/MountDatalake.py", path : "/Eventhub/MountDatalake" }
+  }
+
+  source = each.value.source
+  path   = each.value.path
+}
