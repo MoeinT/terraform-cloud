@@ -19,12 +19,6 @@ ClustersWithInvalidMaxWorkers = plan.filter_attribute_greater_than_value(allClus
 
 MaxWorkersVialations = length(ClustersWithInvalidMaxWorkers["messages"])
 
-
-
-all_keyvault = plan.find_resources("azurerm_key_vault")
-try = plan.evaluate_attribute(all_keyvault, "purge_protection_enabled")
-print(try)
-
 main = rule {
-    MaxWorkersVialations is 0 and ClustersNodeVialations is 0 and plan.evaluate_attribute(all_keyvault, "purge_protection_enabled")
+    MaxWorkersVialations is 0 and ClustersNodeVialations is 0 
 }

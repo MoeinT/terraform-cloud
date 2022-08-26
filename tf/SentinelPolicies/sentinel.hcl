@@ -6,6 +6,6 @@ policy "restrict-databricks-clusters" {
     enforcement_level = "hard-mandatory"
 }
 
-policy "KeyVault" {
+policy "key-vault" {
     enforcement_level = "hard-mandatory"
 }
