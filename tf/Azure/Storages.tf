@@ -14,7 +14,7 @@ resource "azurerm_storage_account" "sq-streamingData" {
   tags                     = local.volvo_tags
 
   network_rules {
-    default_action = "Allow"
+    default_action = "Deny"
     bypass         = ["AzureServices"]
   }
 }
