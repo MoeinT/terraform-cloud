@@ -7,6 +7,9 @@
 
 .terraform.lock.hcl
 
+# Config files
+config.ini
+
 # Crash log files
 crash.log
 

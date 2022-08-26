@@ -8,7 +8,6 @@ resource "azurerm_eventhub_namespace" "EventHubsNamespace" {
   tags                = local.volvo_tags
 }
 
-#All the Eventhubs
 resource "azurerm_eventhub" "AllEventHubs" {
   for_each            = toset(["tweets${var.suffix}${var.environment}"])
   name                = each.key
@@ -18,10 +17,10 @@ resource "azurerm_eventhub" "AllEventHubs" {
   message_retention   = 1
 }
 
-/* resource "azurerm_eventhub_namespace_authorization_rule" "NameSpaceSharedAccessPolicy" {
+/* resource "azurerm_eventhub_namespace_authorization_rule" "eventhub-ns-policy" {
   name                = "RootManageSharedAccessKey"
   namespace_name      = azurerm_eventhub_namespace.EventHubsNamespace.name
-  resource_group_name = azurerm_resource_group.gtools-rg.name
+  resource_group_name = azurerm_resource_group.rg-streamingData.name
 
   listen = true
   send   = true
