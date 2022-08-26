@@ -7,7 +7,6 @@ PurgeViolations = plan.filter_attribute_is_not_value(all_keyvault,
 
 PurgeViolationsMsg = length(PurgeViolations["messages"])
 
-
 // Requiring at least 30 days of retention
 MinSoftDeleted = 30
 SoftDeletedViolation = plan.filter_attribute_less_than_value(all_keyvault,
@@ -15,6 +14,7 @@ SoftDeletedViolation = plan.filter_attribute_less_than_value(all_keyvault,
 
 SoftDeletedViolationMsg = length(SoftDeletedViolation["messages"])
 
+// Final evaluation
 main = rule {
     PurgeViolationsMsg is 0 and SoftDeletedViolationMsg is 0
 }

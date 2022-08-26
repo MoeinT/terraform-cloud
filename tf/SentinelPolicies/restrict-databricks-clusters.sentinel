@@ -1,6 +1,5 @@
 import "tfplan-functions" as plan
 
-
 // Databrick cluster nodes can only be of type Standard_DS3_v2
 allowed_nodes = ["Standard_DS3_v2"]
 all_db_clusters = plan.find_resources("databricks_cluster")
@@ -8,7 +7,6 @@ violatingDBclusters = plan.filter_attribute_not_in_list(all_db_clusters,
                 "node_type_id", allowed_nodes, true)
 
 ClustersNodeVialations = length(violatingDBclusters["messages"])
-
 
 // Databricks clusters can only have up to 5 worker nodes
 max_workers = 5
@@ -19,6 +17,7 @@ ClustersWithInvalidMaxWorkers = plan.filter_attribute_greater_than_value(allClus
 
 MaxWorkersVialations = length(ClustersWithInvalidMaxWorkers["messages"])
 
+// Final evaluation
 main = rule {
     MaxWorkersVialations is 0 and ClustersNodeVialations is 0 
 }

@@ -9,3 +9,7 @@ policy "restrict-databricks-clusters" {
 policy "restrict-keyvaults" {
     enforcement_level = "hard-mandatory"
 }
+
+policy "restrict-eventhub" {
+    enforcement_level = "hard-mandatory"
+}
