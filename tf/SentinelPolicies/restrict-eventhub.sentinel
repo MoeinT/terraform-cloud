@@ -1,0 +1,25 @@
+import "tfplan-functions" as plan
+
+// Eventhub namespaces can only have up to 2 throughput units 
+maxCapacity = 2
+allnamespaces = plan.find_resources("azurerm_eventhub_namespace")
+
+CapacityViolation = plan.filter_attribute_greater_than_value(allnamespaces,
+                "capacity", maxCapacity, true)
+
+CapacityViolationMsg = length(CapacityViolation["messages"])
+
+
+// Eventhubs can have up to 4 partitions
+maxPartitions = 4
+alleventhubs = plan.find_resources("azurerm_eventhub")
+
+partitionCountViolation = plan.filter_attribute_greater_than_value(alleventhubs,
+                "partition_count", maxCapacity, true)
+
+partitionCountViolationMsg = length(partitionCountViolation["messages"])
+
+// Final evaluation
+main = rule {
+    CapacityViolationMsg is 0 and partitionCountViolationMsg is 0
+}

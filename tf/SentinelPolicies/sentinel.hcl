@@ -5,3 +5,11 @@ module "tfplan-functions" {
 policy "restrict-databricks-clusters" {
     enforcement_level = "hard-mandatory"
 }
+
+policy "restrict-keyvaults" {
+    enforcement_level = "hard-mandatory"
+}
+
+policy "restrict-eventhub" {
+    enforcement_level = "hard-mandatory"
+}
