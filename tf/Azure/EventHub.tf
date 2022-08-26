@@ -14,7 +14,7 @@ resource "azurerm_eventhub" "AllEventHubs" {
   name                = each.key
   namespace_name      = azurerm_eventhub_namespace.EventHubsNamespace.name
   resource_group_name = azurerm_resource_group.rg-streamingData.name
-  partition_count     = 6
+  partition_count     = 2
   message_retention   = 1
 }
 
