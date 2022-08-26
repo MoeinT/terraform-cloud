@@ -1,5 +1,5 @@
 resource "azurerm_key_vault" "KeyVault" {
-  name                        = "KeyVault-${var.suffix}-${var.environment}"
+  name                        = "kv-${var.suffix}-${var.environment}"
   location                    = azurerm_resource_group.rg-streamingData.location
   resource_group_name         = azurerm_resource_group.rg-streamingData.name
   enabled_for_disk_encryption = true
