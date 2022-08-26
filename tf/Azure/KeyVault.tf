@@ -7,7 +7,7 @@ resource "azurerm_key_vault" "KeyVault" {
   soft_delete_retention_days  = 30
   purge_protection_enabled    = true
   sku_name                    = "standard"
-
+  tags                        = local.volvo_tags
 
   dynamic "access_policy" {
     for_each = local.access_policy
