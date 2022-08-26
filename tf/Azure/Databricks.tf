@@ -30,7 +30,7 @@ resource "databricks_cluster" "db-cluster" {
 resource "databricks_notebook" "AllNotebooks" {
   for_each = {
     TweetStreaming = { source : "../scripts/StreamingTweets.py", path : "/Eventhubs/StreamingTweets" },
-    MountDatalake  = { source : "../scripts/MountDatalake.py", path : "/Eventhub/MountDatalake" }
+    MountDatalake  = { source : "../scripts/MountDatalake.py", path : "/Eventhubs/MountDatalake" }
   }
 
   source = each.value.source
