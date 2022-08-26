@@ -1,5 +1,6 @@
 import "tfplan-functions" as plan
 
+// All KeyVault should be protected against purging
 all_keyvault = plan.find_resources("azurerm_key_vault")
 PurgeViolations = plan.filter_attribute_is_not_value(all_keyvault, 
                 "purge_protection_enabled", true, true)
@@ -7,8 +8,8 @@ PurgeViolations = plan.filter_attribute_is_not_value(all_keyvault,
 PurgeViolationsMsg = length(PurgeViolations["messages"])
 
 
-// Requiring at least 10 days of retention
-MinSoftDeleted = 10
+// Requiring at least 30 days of retention
+MinSoftDeleted = 30
 SoftDeletedViolation = plan.filter_attribute_less_than_value(all_keyvault,
                     "soft_delete_retention_days", MinSoftDeleted, true)
 
