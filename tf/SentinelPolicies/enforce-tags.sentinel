@@ -2,9 +2,7 @@ import "tfplan/v2" as tfplan
 import "tfplan-functions" as plan
 import "azure-functions" as azure
 
-resource_types = [
-  "azurerm_resource_group"
-]
+resource_types = ["azurerm_resource_group"]
 
 mandatory_tags = ["environment"]
 
