@@ -7,14 +7,14 @@ resource "azurerm_resource_group" "rg-streamingData" {
 resource "azurerm_virtual_network" "Vnet" {
   name                = "virtnetname"
   address_space       = ["10.0.0.0/16"]
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+  location            = azurerm_resource_group.rg-streamingData.location
+  resource_group_name = azurerm_resource_group.rg-streamingData.name
 }
 
 resource "azurerm_subnet" "SubNet" {
   name                 = "subnetname"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
+  resource_group_name  = azurerm_resource_group.rg-streamingData.name
+  virtual_network_name = azurerm_virtual_network.Vnet.name
   address_prefixes     = ["10.0.2.0/24"]
   service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
 }
