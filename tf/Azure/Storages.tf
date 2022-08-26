@@ -12,6 +12,11 @@ resource "azurerm_storage_account" "sq-streamingData" {
   account_replication_type = "LRS"
   is_hns_enabled           = true
   tags                     = local.volvo_tags
+
+  network_rules {
+    default_action = "Deny"
+    bypass         = "AzureServices"
+  }
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "fs-streamingData" {

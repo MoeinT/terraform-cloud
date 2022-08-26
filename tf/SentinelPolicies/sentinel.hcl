@@ -13,3 +13,7 @@ policy "restrict-keyvaults" {
 policy "restrict-eventhub" {
     enforcement_level = "hard-mandatory"
 }
+
+policy "restrict-storageaccounts" {
+    enforcement_level = "hard-mandatory"
+}

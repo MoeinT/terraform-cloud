@@ -1,0 +1,15 @@
+import "tfplan-functions" as plan
+
+// Default network action should be set to "Deny"
+allStorageAccounts = plan.find_resources("azurerm_storage_account")
+allowedAction      = "Deny"
+
+StorageAccountViolations = plan.filter_attribute_greater_than_value(allStorageAccounts,
+                "network_rules.0.default_action", allowedAction, true)
+
+StorageAccountViolationsMSG = length(StorageAccountViolations["messages"])
+
+// Final evaluation
+main = rule {
+    StorageAccountViolationsMSG is 0
+}
