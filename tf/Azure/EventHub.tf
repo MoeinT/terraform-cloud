@@ -4,7 +4,7 @@ resource "azurerm_eventhub_namespace" "EventHubsNamespace" {
   location            = azurerm_resource_group.rg-streamingData.location
   resource_group_name = azurerm_resource_group.rg-streamingData.name
   sku                 = "Basic"
-  capacity            = 3
+  capacity            = 2
   tags                = local.volvo_tags
 }
 
@@ -14,7 +14,7 @@ resource "azurerm_eventhub" "AllEventHubs" {
   name                = each.key
   namespace_name      = azurerm_eventhub_namespace.EventHubsNamespace.name
   resource_group_name = azurerm_resource_group.rg-streamingData.name
-  partition_count     = 2
+  partition_count     = 6
   message_retention   = 1
 }
 
