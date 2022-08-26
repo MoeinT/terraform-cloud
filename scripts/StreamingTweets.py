@@ -87,7 +87,7 @@ connectionProperties = {
 
 # COMMAND ----------
 
-containername  = "commonfiles-staging"
+containername  = "commonfiles-dev"
 mountpoint     = f"/mnt/{containername}"
 
 # COMMAND ----------

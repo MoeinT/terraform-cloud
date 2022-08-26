@@ -15,7 +15,7 @@ dbutils.secrets.list("secret-scopes")
 # COMMAND ----------
 storageaccount = dbutils.secrets.get(scope = "secret-scopes", key = "sa-streaming-name")
 account_key    = dbutils.secrets.get(scope = "secret-scopes", key = "sa-accountkey")
-containername  = "commonfiles-staging"
+containername  = "commonfiles-dev"
 mountpoint     = f"/mnt/{containername}"
 
 if mountpoint in [mnt.mountPoint for mnt in dbutils.fs.mounts()]:
