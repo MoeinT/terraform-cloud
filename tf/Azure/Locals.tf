@@ -8,7 +8,6 @@ locals {
     "PDS"               = "Basic"
     "Service_Level"     = "N/A"
     "Technical_Contact" = "thomas.lienard@consultant.volvo.com"
-    "environment"       = "test"
   }
 
   access_policy = [

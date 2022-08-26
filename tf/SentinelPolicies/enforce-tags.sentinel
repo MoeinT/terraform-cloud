@@ -5,6 +5,7 @@ import "azure-functions" as azure
 resource_types = ["azurerm_resource_group"]
 
 mandatory_tags = ["environment"]
+// ["Assignment_Code", "Business_Owner", "Environment_Type", "ID", "InfoSeC", ""]
 
 allAzureResourcesWithStandardTags = azure.find_resources_with_standard_tags(resource_types)
 
