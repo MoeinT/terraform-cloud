@@ -6,10 +6,10 @@ resource "azurerm_databricks_workspace" "databricks-ws" {
   sku                           = "premium"
   public_network_access_enabled = true
 
-  custom_parameters {
+  /* custom_parameters {
     private_subnet_name = azurerm_subnet.SubNet.id
     virtual_network_id  = azurerm_virtual_network.Vnet.id
-  }
+  } */
 
   tags = local.volvo_tags
 }

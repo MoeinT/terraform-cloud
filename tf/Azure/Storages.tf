@@ -4,7 +4,7 @@ resource "azurerm_resource_group" "rg-streamingData" {
   tags     = local.volvo_tags
 }
 
-resource "azurerm_virtual_network" "Vnet" {
+/* resource "azurerm_virtual_network" "Vnet" {
   name                = "virtnetname"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg-streamingData.location
@@ -17,7 +17,7 @@ resource "azurerm_subnet" "SubNet" {
   virtual_network_name = azurerm_virtual_network.Vnet.name
   address_prefixes     = ["10.0.2.0/24"]
   service_endpoints    = ["Microsoft.Sql", "Microsoft.Storage"]
-}
+} */
 
 resource "azurerm_storage_account" "sq-streamingData" {
   name                     = "sa${var.suffix}${var.environment}"
@@ -28,11 +28,11 @@ resource "azurerm_storage_account" "sq-streamingData" {
   is_hns_enabled           = true
   tags                     = local.volvo_tags
 
-  network_rules {
+  /* network_rules {
     default_action             = "Deny"
     bypass                     = ["AzureServices"]
     virtual_network_subnet_ids = [azurerm_subnet.SubNet.id]
-  }
+  } */
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "fs-streamingData" {
