@@ -1,7 +1,5 @@
 import "tfplan/v2" as tfplan
 import "tfplan-functions" as plan
-// import "azure-functions" as azure
-
 import "tfplan/v2" as tfplan
 
 find_resources_with_standard_tags = func(resource_types) {
@@ -17,13 +15,10 @@ find_resources_with_standard_tags = func(resource_types) {
 }
 
 
-resource_types = ["azurerm_resource_group"]
-
-mandatory_tags = ["environment"]
-// ["Assignment_Code", "Business_Owner", "Environment_Type", "ID", "InfoSeC", ""]
+resource_types = ["azurerm_resource_group", "azurerm_databricks_workspace", "azurerm_eventhub_namespace", "azurerm_key_vault", "azurerm_servicebus_namespace", "azurerm_storage_account"]
+mandatory_tags = ["Assignment_Code", "Business_Owner", "Environment_Type", "ID", "InfoSeC", "PDS", "Service_Level", "Technical_Contact"]
 
 allAzureResourcesWithStandardTags = find_resources_with_standard_tags(resource_types)
-
 violatingAzureResources = plan.filter_attribute_not_contains_list(allAzureResourcesWithStandardTags,
                     "tags", mandatory_tags, true)
 
