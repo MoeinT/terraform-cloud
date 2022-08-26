@@ -1,0 +1,41 @@
+import "tfplan/v2" as tfplan
+import "tfplan-functions" as plan
+import "tfplan/v2" as tfplan
+
+// An azure function designed to retrieve resources with standard tags
+find_resources_with_standard_tags = func(resource_types) {
+  resources = filter tfplan.resource_changes as address, rc {
+    rc.provider_name matches "(.*)azurerm$" and
+    rc.type in resource_types and
+  	rc.mode is "managed" and
+  	(rc.change.actions contains "create" or rc.change.actions contains "update" or
+     rc.change.actions contains "read" or rc.change.actions contains "no-op")
+  }
+
+  return resources
+}
+
+// Certain resources are obliged to have tags
+resource_types = ["azurerm_resource_group", 
+                  "azurerm_databricks_workspace", 
+                  "azurerm_eventhub_namespace", 
+                  "azurerm_key_vault", 
+                  "azurerm_servicebus_namespace", 
+                  "azurerm_storage_account"]
+
+mandatory_tags = ["Assignment_Code", 
+                  "Business_Owner", 
+                  "Environment_Type", 
+                  "ID", 
+                  "InfoSeC", 
+                  "PDS", 
+                  "Service_Level", 
+                  "Technical_Contact"]
+
+allAzureResourcesWithStandardTags = find_resources_with_standard_tags(resource_types)
+violatingAzureResources = plan.filter_attribute_not_contains_list(allAzureResourcesWithStandardTags,
+                    "tags", mandatory_tags, true)
+
+main = rule {
+  length(violatingAzureResources["messages"]) is 0
+}
