@@ -1,5 +1,5 @@
 module "tfplan-functions" {
-    source = "https://raw.githubusercontent.com/hashicorp/terraform-guides/master/governance/third-generation/common-functions/tfplan-functions/tfplan-functions.sentinel"
+    source = "./tfplanFunctions/tfplan-functions.sentinel"
 }
 
 policy "restrict-databricks-clusters" {
@@ -11,5 +11,9 @@ policy "restrict-keyvaults" {
 }
 
 policy "restrict-eventhub" {
+    enforcement_level = "hard-mandatory"
+}
+
+policy "enforce-tags" {
     enforcement_level = "hard-mandatory"
 }
