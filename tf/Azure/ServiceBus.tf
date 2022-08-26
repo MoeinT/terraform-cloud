@@ -1,4 +1,4 @@
-resource "azurerm_servicebus_namespace" "EventGridServiceBus" {
+resource "azurerm_servicebus_namespace" "ServiceBus-ns" {
   name                = "sv-${var.suffix}-${var.environment}"
   location            = azurerm_resource_group.rg-streamingData.location
   resource_group_name = azurerm_resource_group.rg-streamingData.name
