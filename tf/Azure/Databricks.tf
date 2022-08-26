@@ -5,6 +5,7 @@ resource "azurerm_databricks_workspace" "databricks-ws" {
   managed_resource_group_name   = "db-managed-${var.suffix}-${var.environment}"
   sku                           = "premium"
   public_network_access_enabled = true
+  tags                          = local.volvo_tags
 }
 
 provider "databricks" {
@@ -18,10 +19,10 @@ provider "databricks" {
 resource "databricks_cluster" "db-cluster" {
   cluster_name            = "db-${var.suffix}-${var.environment}"
   spark_version           = "11.1.x-scala2.12"
-  node_type_id            = "Standard_DS3_v2"
+  node_type_id            = "Standard_DS4_v2"
   autotermination_minutes = 20
   autoscale {
     min_workers = 1
-    max_workers = 6
+    max_workers = 4
   }
 }
