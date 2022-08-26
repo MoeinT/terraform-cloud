@@ -15,7 +15,7 @@ resource "azurerm_storage_account" "sq-streamingData" {
 
   network_rules {
     default_action = "Deny"
-    bypass         = "AzureServices"
+    bypass         = ["AzureServices"]
   }
 }
 
