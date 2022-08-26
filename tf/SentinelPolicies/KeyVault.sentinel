@@ -1,13 +1,3 @@
-// import "tfplan-functions" as plan
-
-// all_keyvault = plan.find_resources("azurerm_key_vault")
-
-// try = plan.evaluate_attribute(all_keyvault, "purge_protection_enabled")
-// print(try)
-// main = rule {
-//     plan.evaluate_attribute(all_keyvault, "purge_protection_enabled")
-// }
-
 import "tfplan-functions" as plan
 
 allowed_nodes = ["Standard_DS3_v2"]

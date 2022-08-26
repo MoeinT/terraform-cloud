@@ -5,3 +5,7 @@ module "tfplan-functions" {
 policy "restrict-databricks-clusters" {
     enforcement_level = "hard-mandatory"
 }
+
+policy "KeyVault" {
+    enforcement_level = "hard-mandatory"
+}
