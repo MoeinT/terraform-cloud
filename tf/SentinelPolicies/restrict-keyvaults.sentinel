@@ -3,7 +3,7 @@ import "tfplan-functions" as plan
 all_keyvault = plan.find_resources("azurerm_key_vault")
 
 ViolatingKeyVaults = plan.filter_attribute_is_not_value(all_keyvault, 
-                    "purge_protection_enableds", true, true)
+                    "purge_protection_enabled", true, true)
 
 ViolatingMsg = length(ViolatingKeyVaults["messages"])
 
