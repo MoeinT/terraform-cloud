@@ -18,7 +18,7 @@ namingViolationsEventhubMsg = length(namingViolationsEventhub["messages"])
 // KeyVault
 all_keyvault = plan.find_resources("azurerm_key_vault")
 namingViolationsKeyVault = plan.filter_attribute_does_not_match_regex(all_keyvault, "name", "dev|staging|prod", true)
-namingViolationsKeyVaultMsg = length(namingViolations["messages"])
+namingViolationsKeyVaultMsg = length(namingViolationsKeyVault["messages"])
 
 // rg's, sa's and con's
 all_rgs = plan.find_resources("azurerm_resource_group")
