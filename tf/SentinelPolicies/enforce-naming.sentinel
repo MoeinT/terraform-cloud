@@ -1,8 +1,0 @@
-import "tfplan-functions" as plan
-
-db_clusters = plan.find_resources("databricks_cluster")
-ViolatingResource = plan.filter_attribute_does_not_match_regex(db_clusters, "cluster_name", "dev|staging|prod", true)
-
-main = rule {
-    length(ViolatingResource["messages"]) is 0
-}

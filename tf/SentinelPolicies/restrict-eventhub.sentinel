@@ -9,7 +9,6 @@ CapacityViolation = plan.filter_attribute_greater_than_value(allnamespaces,
 
 CapacityViolationMsg = length(CapacityViolation["messages"])
 
-
 // Eventhubs can have up to 4 partitions
 maxPartitions = 4
 alleventhubs = plan.find_resources("azurerm_eventhub")
@@ -19,7 +18,14 @@ partitionCountViolation = plan.filter_attribute_greater_than_value(alleventhubs,
 
 partitionCountViolationMsg = length(partitionCountViolation["messages"])
 
+// Enforce naming conventions
+namingViolationsNS = plan.filter_attribute_does_not_match_regex(allnamespaces, "name", "dev|staging|prod", true)
+namingViolationsnsMsg = length(namingViolationsNS["messages"])
+
+namingViolationsEventhub = plan.filter_attribute_does_not_match_regex(alleventhubs, "name", "dev|staging|prod", true)
+namingViolationsEventhubMsg = length(namingViolationsEventhub["messages"])
+
 // Final evaluation
 main = rule {
-    CapacityViolationMsg is 0 and partitionCountViolationMsg is 0
+    CapacityViolationMsg is 0 and partitionCountViolationMsg is 0 namingViolationsnsMsg is 0 namingViolationsEventhubMsg is 0
 }

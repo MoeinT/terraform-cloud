@@ -1,6 +1,6 @@
 #An eventhub names space for the project
 resource "azurerm_eventhub_namespace" "EventHubsNamespace" {
-  name                = "eventhub22${var.suffix}22${var.environment}"
+  name                = "eventhub22${var.suffix}22" #"eventhub22${var.suffix}22${var.environment}"
   location            = azurerm_resource_group.rg-streamingData.location
   resource_group_name = azurerm_resource_group.rg-streamingData.name
   sku                 = "Basic"
