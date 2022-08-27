@@ -15,6 +15,6 @@ resource "azurerm_storage_account" "sq-streamingData" {
 }
 
 resource "azurerm_storage_data_lake_gen2_filesystem" "fs-streamingData" {
-  name               = "commonfiles-${var.environment}"
+  name               = "commonfiles" # "commonfiles-${var.environment}"
   storage_account_id = azurerm_storage_account.sq-streamingData.id
 }
