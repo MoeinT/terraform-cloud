@@ -6,7 +6,7 @@ all_db_clusters = plan.find_resources("databricks_cluster")
 violatingDBclusters = plan.filter_attribute_not_in_list(all_db_clusters, 
                 "node_type_id", allowed_nodes, true)
 
-ClustersNodeVialations = length(violatingDBclusters["messages"])
+ClustersNodeVialationsMsg = length(violatingDBclusters["messages"])
 
 // Databricks clusters can only have up to 5 worker nodes
 max_workers = 5
@@ -15,9 +15,13 @@ allClusters = plan.find_resources("databricks_cluster")
 ClustersWithInvalidMaxWorkers = plan.filter_attribute_greater_than_value(allClusters,
                 "autoscale.0.max_workers", max_workers, true)
 
-MaxWorkersVialations = length(ClustersWithInvalidMaxWorkers["messages"])
+MaxWorkersVialationsMsg = length(ClustersWithInvalidMaxWorkers["messages"])
 
+// Enforce naming conventions
+namingViolations = plan.filter_attribute_does_not_match_regex(db_clusters, "cluster_name", "dev|staging|prod", true)
+namingViolationsMsg = length(namingViolations["messages"])
+print_violations(namingViolationsMsg)
 // Final evaluation
 main = rule {
-    MaxWorkersVialations is 0 and ClustersNodeVialations is 0 
+    MaxWorkersVialationsMsg is 0 and ClustersNodeVialationsMsg is 0 and namingViolationsMsg is 0
 }
