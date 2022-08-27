@@ -20,7 +20,7 @@ MaxWorkersVialationsMsg = length(ClustersWithInvalidMaxWorkers["messages"])
 // Enforce naming conventions
 namingViolations = plan.filter_attribute_does_not_match_regex(all_db_clusters, "cluster_name", "dev|staging|prod", true)
 namingViolationsMsg = length(namingViolations["messages"])
-plan.print_violations(namingViolationsMsg, "Violations: ")
+
 // Final evaluation
 main = rule {
     MaxWorkersVialationsMsg is 0 and ClustersNodeVialationsMsg is 0 and namingViolationsMsg is 0
