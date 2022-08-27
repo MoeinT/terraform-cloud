@@ -1,0 +1,45 @@
+import "tfplan-functions" as plan
+
+// Databricks cluster
+all_db_clusters = plan.find_resources("databricks_cluster")
+namingViolationsDB = plan.filter_attribute_does_not_match_regex(all_db_clusters, "cluster_name", "dev|staging|prod", true)
+namingViolationsDBMsg = length(namingViolationsDB["messages"])
+
+// Eventhub
+allEventhubs = plan.find_resources("azurerm_eventhub")
+allEventhubNs = plan.find_resources("azurerm_eventhub_namespace")
+
+namingViolationsEventhubNs = plan.filter_attribute_does_not_match_regex(allEventhubNs, "name", "dev|staging|prod", true)
+namingViolationsEventhubNsMsg = length(namingViolationsEventhubNs["messages"])
+
+namingViolationsEventhub = plan.filter_attribute_does_not_match_regex(allEventhubs, "name", "dev|staging|prod", true)
+namingViolationsEventhubMsg = length(namingViolationsEventhub["messages"])
+
+// KeyVault
+all_keyvault = plan.find_resources("azurerm_key_vault")
+namingViolationsKeyVault = plan.filter_attribute_does_not_match_regex(all_keyvault, "name", "dev|staging|prod", true)
+namingViolationsKeyVaultMsg = length(namingViolations["messages"])
+
+// rg's, sa's and con's
+all_rgs = plan.find_resources("azurerm_resource_group")
+rgViolations = plan.filter_attribute_does_not_match_regex(all_rgs, "name", "dev|staging|prod", true)
+rgViolationsMsg = length(rgViolations["messages"])
+
+all_sas = plan.find_resources("azurerm_storage_account")
+sasViolations = plan.filter_attribute_does_not_match_regex(all_sas, "name", "dev|staging|prod", true)
+sasViolationsMsg = length(sasViolations["messages"])
+
+all_cons = plan.find_resources("azurerm_storage_data_lake_gen2_filesystem")
+consViolations = plan.filter_attribute_does_not_match_regex(all_cons, "name", "dev|staging|prod", true)
+consViolationsMsg = length(consViolations["messages"])
+
+// Final evaluation
+main = rule {
+    namingViolationsDBMsg is 0 and 
+    namingViolationsEventhubNsMsg is 0 and 
+    namingViolationsEventhubMsg is 0 and 
+    namingViolationsKeyVaultMsg is 0 and
+    rgViolationsMsg is 0 and
+    sasViolationsMsg is 0 and
+    consViolationsMsg is 0
+}
