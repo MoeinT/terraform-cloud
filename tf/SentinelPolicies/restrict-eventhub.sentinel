@@ -27,5 +27,5 @@ namingViolationsEventhubMsg = length(namingViolationsEventhub["messages"])
 
 // Final evaluation
 main = rule {
-    CapacityViolationMsg is 0 and partitionCountViolationMsg is 0 namingViolationsnsMsg is 0 namingViolationsEventhubMsg is 0
+    CapacityViolationMsg is 0 and partitionCountViolationMsg is 0 and namingViolationsnsMsg is 0 and namingViolationsEventhubMsg is 0
 }
