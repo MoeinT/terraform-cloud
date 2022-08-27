@@ -17,7 +17,3 @@ policy "restrict-eventhub" {
 policy "enforce-tags" {
     enforcement_level = "hard-mandatory"
 }
-
-// policy "enforce-naming" {
-//     enforcement_level = "hard-mandatory"
-// }
