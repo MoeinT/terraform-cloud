@@ -9,7 +9,6 @@ CapacityViolation = plan.filter_attribute_greater_than_value(allnamespaces,
 
 CapacityViolationMsg = length(CapacityViolation["messages"])
 
-
 // Eventhubs can have up to 4 partitions
 maxPartitions = 4
 alleventhubs = plan.find_resources("azurerm_eventhub")
